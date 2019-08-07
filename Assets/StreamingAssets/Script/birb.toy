@@ -1,0 +1,11 @@
+import "Unity";
+
+const birb = Unity.Fetch("Birb");
+
+birb.Update = () => {
+	if (Unity.GetButtonDown("Fire1")) {
+		birb.Rigidbody2D.AddForce(0, 10, "impulse");
+	}
+
+	birb.Rigidbody2D.Rotation += 1;
+};
