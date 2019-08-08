@@ -13,8 +13,6 @@ birb.FixedUpdate = () => {
 };
 
 birb.OnCollisionEnter2D = other => {
-	print "-----------------------------------------------------------------";
-	print other;
 	if (other.tag == "wall") {
 		birb.GameObject.Destroy();
 		print "You lose!";

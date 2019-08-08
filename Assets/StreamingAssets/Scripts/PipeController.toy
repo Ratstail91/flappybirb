@@ -1,0 +1,49 @@
+import "Standard" as std;
+import "Array";
+import "Dictionary";
+import "Unity";
+
+const pipeController = Unity.Fetch("PipeController");
+
+var spawnTimer = std.Clock();
+var pipeArray = Array();
+var score = 0;
+
+pipeController.FixedUpdate = () => {
+	//spawn the pipes on a timer
+	if (std.Clock() - spawnTimer >= 5) {
+		SpawnPipes();
+		spawnTimer = std.Clock();
+	}
+
+	HandlePipes();
+};
+
+var SpawnPipes = () => {
+	var pipe = Dictionary();
+
+	pipe["gameObject"] = Unity.Load("Prefabs/Pipes");
+	pipe["gameObject"].Rigidbody2D.PositionX += 12;
+	pipe["spawnTime"] = std.Clock();
+	pipe["scored"] = false;
+
+	pipeArray.Push(pipe);
+};
+
+var HandlePipes = () => {
+	for (var i = 0; i < pipeArray.Length(); i++) {
+		//destroy old pipes
+		if (std.Clock() - pipeArray[i]["spawnTime"] >= 10) {
+			pipeArray[i]["gameObject"].Destroy();
+			pipeArray.Delete(i);
+			i--; //everything moves down one
+		} else {
+			pipeArray[i]["gameObject"].Rigidbody2D.PositionX -= 0.05;
+			if (pipeArray[i]["gameObject"].Rigidbody2D.PositionX <= 0 && !pipeArray[i]["scored"]) {
+				pipeArray[i]["scored"] = true;
+				score++;
+				print score;
+			}
+		}
+	}
+};
