@@ -6,6 +6,17 @@ birb.Update = () => {
 	if (Unity.GetButtonDown("Fire1")) {
 		birb.Rigidbody2D.AddForce(0, 10, "impulse");
 	}
+};
 
+birb.FixedUpdate = () => {
 	birb.Rigidbody2D.Rotation += 1;
+};
+
+birb.OnCollisionEnter2D = other => {
+	print "-----------------------------------------------------------------";
+	print other;
+	if (other.tag == "wall") {
+		birb.GameObject.Destroy();
+		print "You lose!";
+	}
 };
