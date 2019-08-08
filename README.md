@@ -2,19 +2,19 @@
 
 This is a working demo of the Toy programming language working in the Unity game engine.
 
+[![Flappy Birb](https://i.gyazo.com/007563fd276bf61e97507d7b561fea49.gif)](https://gyazo.com/007563fd276bf61e97507d7b561fea49)
+
 ```
 import "Unity";
 
-print "Hello birb.toy";
-
 const birb = Unity.Fetch("Birb");
 
-assert(birb != null, "birb is null");
+birb.Update = () => {
+	if (Unity.GetButtonDown("Fire1")) {
+		birb.Rigidbody2D.AddForce(0, 10, "impulse");
+	}
 
-print birb;
-
-birb.Awake = () => {
-	print "birb.Awake";
+	birb.Rigidbody2D.Rotation += 1;
 };
 ```
 
