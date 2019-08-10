@@ -1,6 +1,6 @@
 import "Unity";
 
-const birb = Unity.Fetch("Birb");
+const birb = Unity.FetchGameObject("Birb");
 
 birb.Update = () => {
 	if (Unity.GetButtonDown("Fire1")) {
@@ -14,7 +14,7 @@ birb.FixedUpdate = () => {
 
 birb.OnCollisionEnter2D = other => {
 	if (other.tag == "wall") {
-		birb.GameObject.Destroy();
+		Unity.TimeScale = 0;
 		print "You lose!";
 	}
 };

@@ -1,9 +1,10 @@
 import "Standard" as std;
+import "Math";
 import "Array";
 import "Dictionary";
 import "Unity";
 
-const pipeController = Unity.Fetch("PipeController");
+const pipeController = Unity.FetchGameObject("PipeController");
 
 var spawnTimer = std.Clock();
 var pipeArray = Array();
@@ -22,8 +23,9 @@ pipeController.FixedUpdate = () => {
 var SpawnPipes = () => {
 	var pipe = Dictionary();
 
-	pipe["gameObject"] = Unity.Load("Prefabs/Pipes");
-	pipe["gameObject"].Rigidbody2D.PositionX += 12;
+	var posY = Math.Floor(std.Random() * 6) - 3;
+
+	pipe["gameObject"] = Unity.LoadGameObjectAt("Prefabs/Pipes", 12, posY, 0, 0, 0, 0);
 	pipe["spawnTime"] = std.Clock();
 	pipe["scored"] = false;
 
