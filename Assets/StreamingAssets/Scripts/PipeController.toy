@@ -10,7 +10,7 @@ var spawnTimer = std.Clock();
 var pipeArray = Array();
 var score = 0;
 
-pipeController.FixedUpdate = () => {
+pipeController.Behaviour.FixedUpdate = () => {
 	//spawn the pipes on a timer
 	if (std.Clock() - spawnTimer >= 5) {
 		SpawnPipes();
