@@ -13,8 +13,7 @@ birb.Behaviour.FixedUpdate = () => {
 };
 
 birb.Behaviour.OnCollisionEnter2D = other => {
-	if (other.tag == "wall") {
-		Unity.TimeScale = 0;
-		print "You lose!";
+	if (other.Tag == "wall") {
+		Unity.TimeScale = 0; //pause the game on loss
 	}
 };
