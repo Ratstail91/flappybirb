@@ -3,25 +3,21 @@ import "Math";
 import "Array";
 import "Dictionary";
 import "Unity";
+import "Globals";
 
-const pipeController = Unity.FetchGameObject("PipeController");
-const scoreText = Unity.FetchGameObject("Score Text");
-const loseText = Unity.FetchGameObject("Lose Text");
-
-loseText.TextMesh.SetText(""); //zero out the text
+var loseText = Unity.FetchGameObject("Lose Text");
 
 var spawnTimer = std.Clock();
 var pipeArray = Array();
-var score = 0;
 
-pipeController.Behaviour.Update = () => {
+this.Behaviour.Update = () => {
 	//handle game loss
 	if (Unity.TimeScale == 0 && loseText.TextMesh.GetText().Length() == 0) {
 		loseText.TextMesh.SetText("You Lost!!");
 	}
 };
 
-pipeController.Behaviour.FixedUpdate = () => {
+this.Behaviour.FixedUpdate = () => {
 	//spawn the pipes on a timer
 	if (std.Clock() - spawnTimer >= 5) {
 		SpawnPipes();
@@ -54,14 +50,8 @@ const HandlePipes = () => {
 			pipeArray[i]["gameObject"].Rigidbody2D.PositionX -= 0.05;
 			if (pipeArray[i]["gameObject"].Rigidbody2D.PositionX <= 0 && !pipeArray[i]["scored"]) {
 				pipeArray[i]["scored"] = true;
-				IncrementScore();
+				Globals["score"] = Globals["score"] + 1;
 			}
 		}
 	}
 };
-
-const IncrementScore = () => {
-	score++;
-	scoreText.TextMesh.SetText("Score: " + std.ToString(score));
-};
-

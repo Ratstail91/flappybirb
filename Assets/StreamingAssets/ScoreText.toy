@@ -1,0 +1,8 @@
+import "Standard";
+import "Globals";
+
+Globals["score"] = 0;
+
+this.Behaviour.Update = () => {
+	this.TextMesh.SetText("Score: " + ToString( Globals["score"] ));
+};

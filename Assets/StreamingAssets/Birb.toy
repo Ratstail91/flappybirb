@@ -1,0 +1,17 @@
+import "Unity";
+
+this.Behaviour.Update = () => {
+	if (Unity.GetButtonDown("Fire1")) {
+		this.Rigidbody2D.AddForce(0, 10, "impulse");
+	}
+};
+
+this.Behaviour.FixedUpdate = () => {
+	this.Rigidbody2D.Rotation += 1;
+};
+
+this.Behaviour.OnCollisionEnter2D = other => {
+	if (other.Tag == "wall") {
+		Unity.TimeScale = 0; //pause the game on loss
+	}
+};

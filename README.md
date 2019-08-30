@@ -7,14 +7,14 @@ This is a working demo of the Toy programming language working in the Unity game
 ```
 import "Unity";
 
-const birb = Unity.Fetch("Birb");
-
-birb.Update = () => {
+this.Behaviour.Update = () => {
 	if (Unity.GetButtonDown("Fire1")) {
-		birb.Rigidbody2D.AddForce(0, 10, "impulse");
+		this.Rigidbody2D.AddForce(0, 10, "impulse");
 	}
+};
 
-	birb.Rigidbody2D.Rotation += 1;
+this.Behaviour.FixedUpdate = () => {
+	this.Rigidbody2D.Rotation += 1;
 };
 ```
 
